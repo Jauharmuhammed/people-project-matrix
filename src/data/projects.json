@@ -1,0 +1,208 @@
+{
+  "projects": [
+    {
+      "id": "PRJ001",
+      "name": "Downtown Commercial Complex",
+      "description": "Mixed-use 20-story commercial building with retail spaces and offices",
+      "status": "IN_PROGRESS",
+      "startDate": "2024-01-15",
+      "estimatedEndDate": "2025-06-30",
+      "location": "123 Main Street, Downtown",
+      "budget": 45000000,
+      "teamMembers": [
+        "arch1",
+        "str1",
+        "mech1",
+        "elec1",
+        "qc1",
+        "civ1"
+      ],
+      "projectManager": "qc1",
+      "progress": 35
+    },
+    {
+      "id": "PRJ002",
+      "name": "Riverside Residential Development",
+      "description": "Luxury residential complex with 150 units and amenities",
+      "status": "PLANNING",
+      "startDate": "2024-03-01",
+      "estimatedEndDate": "2025-09-30",
+      "location": "456 River Road",
+      "budget": 28000000,
+      "teamMembers": [
+        "arch2",
+        "str2",
+        "mech2",
+        "elec2",
+        "qc2",
+        "ls1"
+      ],
+      "projectManager": "qc2",
+      "progress": 10
+    },
+    {
+      "id": "PRJ003",
+      "name": "City Hospital Expansion",
+      "description": "Addition of new emergency wing and specialized care units",
+      "status": "IN_PROGRESS",
+      "startDate": "2023-11-01",
+      "estimatedEndDate": "2025-04-30",
+      "location": "789 Health Avenue",
+      "budget": 65000000,
+      "teamMembers": [
+        "arch3",
+        "str3",
+        "mech3",
+        "elec3",
+        "qc3",
+        "fp1",
+        "cih1"
+      ],
+      "projectManager": "qc3",
+      "progress": 45
+    },
+    {
+      "id": "PRJ004",
+      "name": "Tech Innovation Campus",
+      "description": "Modern research and development facility with sustainable features",
+      "status": "PLANNING",
+      "startDate": "2024-04-15",
+      "estimatedEndDate": "2025-12-31",
+      "location": "101 Innovation Drive",
+      "budget": 55000000,
+      "teamMembers": [
+        "arch4",
+        "str4",
+        "mech4",
+        "elec4",
+        "qc4",
+        "geo1"
+      ],
+      "projectManager": "qc4",
+      "progress": 5
+    },
+    {
+      "id": "PRJ005",
+      "name": "Historic Building Renovation",
+      "description": "Restoration and modernization of 19th-century landmark building",
+      "status": "IN_PROGRESS",
+      "startDate": "2023-09-15",
+      "estimatedEndDate": "2024-08-30",
+      "location": "234 Heritage Street",
+      "budget": 18000000,
+      "teamMembers": [
+        "arch5",
+        "str5",
+        "mech5",
+        "elec5",
+        "qc5",
+        "cih2"
+      ],
+      "projectManager": "qc5",
+      "progress": 70
+    },
+    {
+      "id": "PRJ006",
+      "name": "Sports Complex Development",
+      "description": "Multi-purpose sports facility with indoor and outdoor venues",
+      "status": "COMPLETED",
+      "startDate": "2023-03-01",
+      "estimatedEndDate": "2024-02-28",
+      "location": "567 Sports Avenue",
+      "budget": 35000000,
+      "teamMembers": [
+        "arch1",
+        "str2",
+        "mech3",
+        "elec4",
+        "qc2",
+        "civ2"
+      ],
+      "projectManager": "qc2",
+      "progress": 100
+    },
+    {
+      "id": "PRJ007",
+      "name": "Green Energy Plant",
+      "description": "Renewable energy facility with solar and wind power integration",
+      "status": "IN_PROGRESS",
+      "startDate": "2023-12-01",
+      "estimatedEndDate": "2025-03-31",
+      "location": "890 Energy Park Road",
+      "budget": 75000000,
+      "teamMembers": [
+        "arch2",
+        "str3",
+        "mech1",
+        "elec1",
+        "qc3",
+        "geo2",
+        "civ3"
+      ],
+      "projectManager": "qc3",
+      "progress": 25
+    },
+    {
+      "id": "PRJ008",
+      "name": "Shopping Mall Expansion",
+      "description": "Addition of new retail wing and parking structure",
+      "status": "ON_HOLD",
+      "startDate": "2024-02-01",
+      "estimatedEndDate": "2025-08-31",
+      "location": "432 Retail Drive",
+      "budget": 42000000,
+      "teamMembers": [
+        "arch3",
+        "str4",
+        "mech2",
+        "elec2",
+        "qc4",
+        "fp2"
+      ],
+      "projectManager": "qc4",
+      "progress": 15
+    },
+    {
+      "id": "PRJ009",
+      "name": "Educational Campus",
+      "description": "New university campus with multiple academic buildings",
+      "status": "IN_PROGRESS",
+      "startDate": "2023-10-15",
+      "estimatedEndDate": "2025-07-31",
+      "location": "765 Education Boulevard",
+      "budget": 85000000,
+      "teamMembers": [
+        "arch4",
+        "str5",
+        "mech4",
+        "elec3",
+        "qc5",
+        "ls2",
+        "civ4"
+      ],
+      "projectManager": "qc5",
+      "progress": 40
+    },
+    {
+      "id": "PRJ010",
+      "name": "Industrial Park Development",
+      "description": "Manufacturing and warehouse facility with office spaces",
+      "status": "PLANNING",
+      "startDate": "2024-05-01",
+      "estimatedEndDate": "2025-11-30",
+      "location": "321 Industrial Way",
+      "budget": 58000000,
+      "teamMembers": [
+        "arch5",
+        "str1",
+        "mech5",
+        "elec5",
+        "qc1",
+        "geo3",
+        "cih3"
+      ],
+      "projectManager": "qc1",
+      "progress": 8
+    }
+  ]
+}
