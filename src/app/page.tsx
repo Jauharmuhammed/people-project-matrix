@@ -21,7 +21,7 @@ const transformedData: IProject[] = projectsData.projects.map((project) => ({
 
 export default function ProjectsPage() {
   return (
-    <div className="h-full flex-1 flex-col space-y-8 p-8 md:flex">
+    <div className="h-full flex-1 flex-col space-y-8 px-8 pb-4 md:flex">
       <DataTable columns={columns} data={transformedData} />
     </div>
   );
