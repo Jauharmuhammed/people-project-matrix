@@ -39,7 +39,7 @@ export interface IMembers {
 export interface IProjectRole {
   key: MemberRole;
   value: boolean;
-  type: FieldType.MEMBER;
+  type: FieldType.ROLE;
 }
 
 export interface IProject {

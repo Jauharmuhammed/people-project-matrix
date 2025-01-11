@@ -23,36 +23,36 @@ import {
 import {
   PlusCircle,
   Type,
-  ListFilter,
   ToggleLeft,
   Hash,
   Calendar,
+  UserRoundPlus,
 } from "lucide-react";
 import { useState } from "react";
-import { FieldType } from "@/lib/types";
+import { FieldType } from "@/lib/constants";
 
 interface AddColumnDrawerProps {
   onAddColumn?: (column: { key: string; type: FieldType }) => void;
 }
 
 const fieldTypeIcons = {
-  text: <Type className="h-4 w-4" />,
-  select: <ListFilter className="h-4 w-4" />,
-  boolean: <ToggleLeft className="h-4 w-4" />,
-  number: <Hash className="h-4 w-4" />,
-  date: <Calendar className="h-4 w-4" />,
+  [FieldType.TEXT]: <Type className="h-4 w-4" />,
+  [FieldType.BOOLEAN]: <ToggleLeft className="h-4 w-4" />,
+  [FieldType.NUMBER]: <Hash className="h-4 w-4" />,
+  [FieldType.DATE]: <Calendar className="h-4 w-4" />,
+  [FieldType.ROLE]: <UserRoundPlus className="h-4 w-4" />,
 };
 
 export function AddColumnDrawer({ onAddColumn }: AddColumnDrawerProps) {
   const [columnKey, setColumnKey] = useState("");
-  const [columnType, setColumnType] = useState<FieldType>("text");
+  const [columnType, setColumnType] = useState<FieldType>(FieldType.TEXT);
   const [open, setOpen] = useState(false);
 
   const handleAddColumn = () => {
     if (columnKey && onAddColumn) {
       onAddColumn({ key: columnKey, type: columnType });
       setColumnKey("");
-      setColumnType("text");
+      setColumnType(FieldType.TEXT);
       setOpen(false);
     }
   };
@@ -91,7 +91,9 @@ export function AddColumnDrawer({ onAddColumn }: AddColumnDrawerProps) {
                 <SelectValue placeholder="Select column type">
                   <div className="flex items-center gap-2">
                     {fieldTypeIcons[columnType]}
-                    <span className="capitalize">{columnType}</span>
+                    <span className="capitalize">
+                      {columnType.toLowerCase()}
+                    </span>
                   </div>
                 </SelectValue>
               </SelectTrigger>
@@ -100,7 +102,7 @@ export function AddColumnDrawer({ onAddColumn }: AddColumnDrawerProps) {
                   <SelectItem key={type} value={type}>
                     <div className="flex items-center gap-2">
                       {icon}
-                      <span className="capitalize">{type}</span>
+                      <span className="capitalize">{type.toLowerCase()}</span>
                     </div>
                   </SelectItem>
                 ))}

@@ -27,7 +27,7 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { DataTableExport } from "@/components/data-table/export";
 import { DataTableViewOptions } from "./view";
-import { FieldType } from "@/lib/constants";
+import { FieldType, PROJECT_ROLE_ITEMS } from "@/lib/constants";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -48,39 +48,63 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
-  const [columns, setColumns] = React.useState<ColumnDef<TData, TValue>[]>(initialColumns);
+  const [columns, setColumns] =
+    React.useState<ColumnDef<TData, TValue>[]>(initialColumns);
 
-  const handleAddColumn = React.useCallback(({ key, type }: { key: string; type: FieldType }) => {
-    const newColumn: ColumnDef<TData, TValue> = {
-      accessorKey: key,
-      header: () => <span className="text-xs capitalize">{key.replace(/_/g, " ")}</span>,
-      cell: ({ row }) => {
-        const value = row.getValue(key);
-        switch (type) {
-          case FieldType.BOOLEAN:
-            return <div className="w-[100px]">{String(value ? "Yes" : "No")}</div>;
-          case FieldType.DATE:
-            return value ? (
-              <div className="w-[100px]">
-                {new Date(value.toString()).toLocaleDateString()}
-              </div>
-            ) : null;
-          case FieldType.NUMBER:
-            return <div className="w-[100px]">{Number(value).toString()}</div>;
-          default:
-            return <div className="w-[150px] truncate">{String(value)}</div>;
-        }
-      },
-    };
-    setColumns((prev) => {
-      const actionsColumnIndex = prev.findIndex((col) => col.id === "actions");
-      if (actionsColumnIndex === -1) return [...prev, newColumn];
-      
-      const newColumns = [...prev];
-      newColumns.splice(actionsColumnIndex, 0, newColumn);
-      return newColumns;
-    });
-  }, []);
+  const handleAddColumn = React.useCallback(
+    ({ key, type }: { key: string; type: FieldType }) => {
+      const newColumn: ColumnDef<TData, TValue> = {
+        accessorKey: key,
+        header: () => (
+          <span className="text-xs capitalize">{key.replace(/_/g, " ")}</span>
+        ),
+        cell: ({ row }) => {
+          const value = row.getValue(key);
+          switch (type) {
+            case FieldType.BOOLEAN:
+              return (
+                <div className="w-[100px]">{String(value ? "Yes" : "No")}</div>
+              );
+            case FieldType.DATE:
+              return value ? (
+                <div className="w-[100px]">
+                  {new Date(value.toString()).toLocaleDateString()}
+                </div>
+              ) : null;
+            case FieldType.NUMBER:
+              return (
+                <div className="w-[100px]">{Number(value).toString()}</div>
+              );
+            default:
+              return <div className="w-[150px] truncate">{String(value)}</div>;
+          }
+        },
+      };
+
+      setColumns((prev) => {
+        const actionsColumnIndex = prev.findIndex(
+          (col) => col.id === "actions"
+        );
+        const firstRoleColumnIndex = prev.findIndex((col) =>
+          PROJECT_ROLE_ITEMS.some((role) => role.key === col.id)
+        );
+
+        const insertIndex =
+          type === FieldType.ROLE
+            ? actionsColumnIndex
+            : firstRoleColumnIndex === -1
+            ? actionsColumnIndex
+            : firstRoleColumnIndex;
+
+        if (insertIndex === -1) return [...prev, newColumn];
+
+        const newColumns = [...prev];
+        newColumns.splice(insertIndex, 0, newColumn);
+        return newColumns;
+      });
+    },
+    []
+  );
 
   const table = useReactTable({
     data,
