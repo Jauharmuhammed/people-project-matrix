@@ -1,3 +1,5 @@
+import { FieldType } from "./constants";
+
 export enum ProjectStatus {
   IN_PROGRESS = "IN_PROGRESS",
   COMPLETED = "COMPLETED",
@@ -46,10 +48,3 @@ export interface IProject {
   projectDetails: IProjectDetails[];
   members: IMembers[];
 }
-
-export type FieldType =
-  | "boolean"
-  | "select"
-  | "text"
-  | "number"
-  | "date";

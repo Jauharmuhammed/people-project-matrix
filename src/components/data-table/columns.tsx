@@ -20,10 +20,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { IProject, ProjectStatus, FieldType } from "@/lib/types";
+import { IProject, ProjectStatus } from "@/lib/types";
 import { ArrowUp, ArrowDown, EyeOff } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { AddColumnDrawer } from "./add-column-drawer";
+import { FieldType, PROJECT_DETAILS_ITEMS } from "@/lib/constants";
 
 declare module "@tanstack/table-core" {
   interface TableMeta<TData extends unknown> {
@@ -214,56 +215,17 @@ export const columns: ColumnDef<IProject>[] = [
       </div>
     ),
   },
-  {
-    accessorFn: (row) => row.projectDetails.find(d => d.key === "new_construction")?.value,
-    id: "new_construction",
-    header: () => <span className="text-xs">New Construction</span>,
-    cell: ({ row }) => (
-      <div className="flex justify-center">
-        <Checkbox checked={row.getValue("new_construction")} disabled />
+  ...PROJECT_DETAILS_ITEMS.map((detail) => ({
+    accessorFn: (row: IProject) => row.projectDetails.find((d) => d.key === detail.key)?.value,
+    id: detail.key,
+    header: () => <span className="text-xs">{detail.key.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</span>,
+    cell: ({ row }: { row: any }) => (
+      <div className="flex w-[140px]">
+        <Checkbox defaultChecked={row.getValue(detail.key)} />
       </div>
     ),
-  },
-  {
-    accessorFn: (row) => row.projectDetails.find(d => d.key === "renovation")?.value,
-    id: "renovation",
-    header: () => <span className="text-xs">Renovation</span>,
-    cell: ({ row }) => (
-      <div className="flex justify-center">
-        <Checkbox checked={row.getValue("renovation")} disabled />
-      </div>
-    ),
-  },
-  {
-    accessorFn: (row) => row.projectDetails.find(d => d.key === "commissioning")?.value,
-    id: "commissioning",
-    header: () => <span className="text-xs">Commissioning</span>,
-    cell: ({ row }) => (
-      <div className="flex justify-center">
-        <Checkbox checked={row.getValue("commissioning")} disabled />
-      </div>
-    ),
-  },
-  {
-    accessorFn: (row) => row.projectDetails.find(d => d.key === "vertical_construction")?.value,
-    id: "vertical_construction",
-    header: () => <span className="text-xs">Vertical Construction</span>,
-    cell: ({ row }) => (
-      <div className="flex justify-center">
-        <Checkbox checked={row.getValue("vertical_construction")} disabled />
-      </div>
-    ),
-  },
-  {
-    accessorFn: (row) => row.projectDetails.find(d => d.key === "horizontal_construction")?.value,
-    id: "horizontal_construction",
-    header: () => <span className="text-xs">Horizontal Construction</span>,
-    cell: ({ row }) => (
-      <div className="flex justify-center">
-        <Checkbox checked={row.getValue("horizontal_construction")} disabled />
-      </div>
-    ),
-  },
+  })
+  ),
   {
     id: "actions",
     enableHiding: false,
