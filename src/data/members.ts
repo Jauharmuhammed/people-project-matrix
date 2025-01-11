@@ -69,6 +69,27 @@ export const members: IMembers[] = [
     role: MemberRole.ARCHITECTURE
   },
   {
+    id: "arch6",
+    name: "Sarah Johnson",
+    email: "sarah.johnson@company.com",
+    profilePicture: "https://randomuser.me/api/portraits/women/40.jpg",
+    role: MemberRole.ARCHITECTURE
+  },
+  {
+    id: "arch7",
+    name: "Patricia Garcia",
+    email: "patricia.garcia@company.com",
+    profilePicture: "https://randomuser.me/api/portraits/women/41.jpg",
+    role: MemberRole.ARCHITECTURE
+  },
+  {
+    id: "arch8",
+    name: "John Doe",
+    email: "john.doe@company.com",
+    profilePicture: "https://randomuser.me/api/portraits/men/42.jpg",
+    role: MemberRole.ARCHITECTURE
+  },
+  {
     id: "str1",
     name: "Patricia Garcia",
     email: "patricia.garcia@company.com",

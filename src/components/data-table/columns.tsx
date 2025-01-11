@@ -26,6 +26,7 @@ import { AddColumnDrawer } from "./add-column-drawer";
 import { FieldType, PROJECT_DETAILS_ITEMS, PROJECT_ROLE_ITEMS } from "@/lib/constants";
 import { EditableMemberCell } from "./columns/editable-member-cell";
 import { TextCell, DateCell } from "./columns/cells";
+import { Badge } from "../ui/badge";
 
 declare module "@tanstack/table-core" {
   interface TableMeta<TData extends unknown> {
@@ -145,15 +146,15 @@ export const columns: ColumnDef<IProject>[] = [
     accessorKey: "location",
     header: () => <span className="text-xs">Location</span>,
     cell: ({ row }) => (
-      <div className="w-[120px] truncate">
-        <TextCell value={row.getValue("location")} width="w-[120px]" className="truncate" />
+      <div className="w-[180px] truncate">
+        <TextCell value={row.getValue("location")} width="w-[180px]" className="truncate" />
       </div>
     ),
   },
   {
     accessorKey: "cost",
     header: ({ column }) => (
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-2 w-[180px]">
         <span className="text-xs">Cost</span>
         <SortButton column={column} />
       </div>
@@ -165,7 +166,7 @@ export const columns: ColumnDef<IProject>[] = [
         currency: "USD",
       }).format(amount);
 
-      return <div className="w-[150px] font-medium">{formatted}</div>;
+      return <div className="w-[180px] font-medium">{formatted}</div>;
     },
   },
   {
@@ -174,7 +175,7 @@ export const columns: ColumnDef<IProject>[] = [
     cell: ({ row }) => {
       const status = row.getValue("status") as ProjectStatus;
       return (
-        <div className="w-[120px] flex items-center gap-2">
+        <div className="w-[180px] flex items-center gap-2">
           <div className="flex-shrink-0">
             {status === ProjectStatus.TO_BE_STARTED && (
               <CircleDot className="h-4 w-4 text-muted-foreground" />
@@ -195,9 +196,9 @@ export const columns: ColumnDef<IProject>[] = [
               <PauseCircle className="h-4 w-4 text-muted-foreground" />
             )}
           </div>
-          <p className="text-xs capitalize">
+          <Badge variant="outline" className="text-[10px] uppercase py-0">
             {status.toLowerCase().replace("_", " ")}
-          </p>
+          </Badge>
         </div>
       );
     },
@@ -206,14 +207,14 @@ export const columns: ColumnDef<IProject>[] = [
     accessorKey: "designCompletionDate",
     header: () => <span className="text-xs">Design Completion Date</span>,
     cell: ({ row }) => (
-      <DateCell value={row.getValue("designCompletionDate")} />
+      <DateCell width="w-[180px]" value={row.getValue("designCompletionDate")} />
     ),
   },
   {
     accessorKey: "constructionCompletionDate",
     header: () => <span className="text-xs">Construction Completion Date</span>,
     cell: ({ row }) => (
-      <DateCell value={row.getValue("constructionCompletionDate")} />
+      <DateCell width="w-[180px]" value={row.getValue("constructionCompletionDate")} />
     ),
   },
   ...PROJECT_DETAILS_ITEMS.map((detail) => ({
@@ -221,7 +222,7 @@ export const columns: ColumnDef<IProject>[] = [
     id: detail.key,
     header: () => <span className="text-xs">{detail.key.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</span>,
     cell: ({ row }: { row: Row<IProject> }) => (
-      <div className="flex w-[140px]">
+      <div className="flex w-[180px]">
         <Checkbox defaultChecked={row.getValue(detail.key)} />
       </div>
     ),
@@ -242,7 +243,7 @@ export const columns: ColumnDef<IProject>[] = [
       };
 
       return (
-        <div className="w-[120px]">
+        <div className="w-[180px]">
           <EditableMemberCell
             role={role.key}
             value={members}

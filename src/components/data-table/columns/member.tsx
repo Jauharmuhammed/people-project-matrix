@@ -39,7 +39,7 @@ export function MemberAvatarGroup({ members }: MemberAvatarGroupProps) {
       {displayMembers.map((member) => (
         <HoverCard key={member.id}>
           <HoverCardTrigger asChild>
-            <Avatar className="h-8 w-8 border-2 border-background cursor-pointer">
+            <Avatar className="size-7 border-2 border-background cursor-pointer">
               <AvatarImage src={member?.profilePicture} alt={member.name} />
               <AvatarFallback className={`text-[10px] text-white ${getRandomColor(member.id)}`}>
                 {member.name.split(" ").map(n => n[0]).join("")}
