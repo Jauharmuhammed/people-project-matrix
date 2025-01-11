@@ -12,7 +12,6 @@ export const members: IMembers[] = [
     id: "qc2",
     name: "Michael Chen",
     email: "michael.chen@company.com",
-    profilePicture: "https://randomuser.me/api/portraits/men/2.jpg",
     role: MemberRole.QC_MANAGER
   },
   {
@@ -26,7 +25,6 @@ export const members: IMembers[] = [
     id: "qc4",
     name: "James Wilson",
     email: "james.wilson@company.com",
-    profilePicture: "https://randomuser.me/api/portraits/men/4.jpg",
     role: MemberRole.QC_MANAGER
   },
   {
@@ -54,7 +52,6 @@ export const members: IMembers[] = [
     id: "arch3",
     name: "Robert Martinez",
     email: "robert.martinez@company.com",
-    profilePicture: "https://randomuser.me/api/portraits/men/8.jpg",
     role: MemberRole.ARCHITECTURE
   },
   {
@@ -75,21 +72,18 @@ export const members: IMembers[] = [
     id: "str1",
     name: "Patricia Garcia",
     email: "patricia.garcia@company.com",
-    profilePicture: "https://randomuser.me/api/portraits/women/11.jpg",
     role: MemberRole.STRUCTURAL
   },
   {
     id: "str2",
     name: "Kevin Anderson",
     email: "kevin.anderson@company.com",
-    profilePicture: "https://randomuser.me/api/portraits/men/12.jpg",
     role: MemberRole.STRUCTURAL
   },
   {
     id: "str3",
     name: "Michelle Park",
     email: "michelle.park@company.com",
-    profilePicture: "https://randomuser.me/api/portraits/women/13.jpg",
     role: MemberRole.STRUCTURAL
   },
   {
@@ -124,14 +118,12 @@ export const members: IMembers[] = [
     id: "civ3",
     name: "William Davis",
     email: "william.davis@company.com",
-    profilePicture: "https://randomuser.me/api/portraits/men/18.jpg",
     role: MemberRole.CIVIL
   },
   {
     id: "civ4",
     name: "Maria Hernandez",
     email: "maria.hernandez@company.com",
-    profilePicture: "https://randomuser.me/api/portraits/women/19.jpg",
     role: MemberRole.CIVIL
   },
   {
@@ -159,7 +151,6 @@ export const members: IMembers[] = [
     id: "mech3",
     name: "Sandra Martinez",
     email: "sandra.martinez@company.com",
-    profilePicture: "https://randomuser.me/api/portraits/women/23.jpg",
     role: MemberRole.MECHANICAL
   },
   {
@@ -180,14 +171,12 @@ export const members: IMembers[] = [
     id: "elec1",
     name: "George Wilson",
     email: "george.wilson@company.com",
-    profilePicture: "https://randomuser.me/api/portraits/men/26.jpg",
     role: MemberRole.ELECTRICAL
   },
   {
     id: "elec2",
     name: "Margaret Chen",
     email: "margaret.chen@company.com",
-    profilePicture: "https://randomuser.me/api/portraits/women/27.jpg",
     role: MemberRole.ELECTRICAL
   },
   {
@@ -201,7 +190,6 @@ export const members: IMembers[] = [
     id: "elec4",
     name: "Dorothy Brown",
     email: "dorothy.brown@company.com",
-    profilePicture: "https://randomuser.me/api/portraits/women/29.jpg",
     role: MemberRole.ELECTRICAL
   },
   {
@@ -327,14 +315,12 @@ export const members: IMembers[] = [
     id: "cih2",
     name: "Deborah Davis",
     email: "deborah.davis@company.com",
-    profilePicture: "https://randomuser.me/api/portraits/women/47.jpg",
     role: MemberRole.CERTIFIED_INDUSTRIAL_HYGIENIST
   },
   {
     id: "cih3",
     name: "Raymond Chen",
     email: "raymond.chen@company.com",
-    profilePicture: "https://randomuser.me/api/portraits/men/48.jpg",
     role: MemberRole.CERTIFIED_INDUSTRIAL_HYGIENIST
   },
   {

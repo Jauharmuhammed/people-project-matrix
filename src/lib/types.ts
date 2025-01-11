@@ -22,18 +22,24 @@ export enum MemberRole {
   CIVIL = "CIVIL",
   MECHANICAL = "MECHANICAL",
   ELECTRICAL = "ELECTRICAL",
-  FIRE_PROTECTION = "Fire Protection",
-  GEOTECHNICAL_ENGINEER = "Geotechnical Engineer",
-  LAND_SURVEYOR = "Land Surveyor",
-  CERTIFIED_INDUSTRIAL_HYGIENIST = "Certified Industrial Hygienist",
+  FIRE_PROTECTION = "FIRE PROTECTION",
+  GEOTECHNICAL_ENGINEER = "GEOTECHNICAL ENGINEER",
+  LAND_SURVEYOR = "LAND SURVEYOR",
+  CERTIFIED_INDUSTRIAL_HYGIENIST = "CERTIFIED INDUSTRIAL HYGIENIST",
 }
 
 export interface IMembers {
   id: string;
   name: string;
   email: string;
-  profilePicture: string;
+  profilePicture?: string;
   role: MemberRole;
+}
+
+export interface IProjectRole {
+  key: MemberRole;
+  value: boolean;
+  type: FieldType.MEMBER;
 }
 
 export interface IProject {

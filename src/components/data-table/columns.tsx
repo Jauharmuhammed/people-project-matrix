@@ -20,11 +20,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { IProject, ProjectStatus } from "@/lib/types";
+import { IProject, ProjectStatus, IMembers } from "@/lib/types";
 import { ArrowUp, ArrowDown, EyeOff } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { AddColumnDrawer } from "./add-column-drawer";
-import { FieldType, PROJECT_DETAILS_ITEMS } from "@/lib/constants";
+import { FieldType, PROJECT_DETAILS_ITEMS, PROJECT_ROLE_ITEMS } from "@/lib/constants";
+import { MemberAvatarGroup } from "./columns/member";
 
 declare module "@tanstack/table-core" {
   interface TableMeta<TData extends unknown> {
@@ -99,7 +100,7 @@ export const columns: ColumnDef<IProject>[] = [
       </div>
     ),
     meta: {
-      className: "sticky left-0",
+      className: "sticky left-0 z-[100]",
     } as ColumnMetaType,
   },
   {
@@ -111,7 +112,7 @@ export const columns: ColumnDef<IProject>[] = [
       <div className="w-[60px] truncate">{row.getValue("id")}</div>
     ),
     meta: {
-      className: "sticky left-[40px]",
+      className: "sticky left-[40px] z-[100]",
     } as ColumnMetaType,
   },
   {
@@ -128,7 +129,7 @@ export const columns: ColumnDef<IProject>[] = [
       </div>
     ),
     meta: {
-      className: "sticky left-[116px] bg-background",
+      className: "sticky left-[116px] z-[100] bg-background",
     } as ColumnMetaType,
   },
   {
@@ -226,6 +227,19 @@ export const columns: ColumnDef<IProject>[] = [
     ),
   })
   ),
+  ...PROJECT_ROLE_ITEMS.map((role) => ({
+    id: role.key,
+    header: () => <span className="text-xs">{role.key.replace(/_/g, ' ')}</span>,
+    cell: ({ row }: { row: any }) => {
+      const members = row.original.members.filter((m: IMembers) => m.role === role.key);
+      return (
+        <div className="w-[120px]">
+          <MemberAvatarGroup members={members} />
+        </div>
+      );
+    },
+  })
+  ),
   {
     id: "actions",
     enableHiding: false,
@@ -260,7 +274,8 @@ export const columns: ColumnDef<IProject>[] = [
       );
     },
     meta: {
-      className: "sticky right-0",
+      className: "sticky right-0 z-[100]",
     } as ColumnMetaType,
   },
 ];
+
