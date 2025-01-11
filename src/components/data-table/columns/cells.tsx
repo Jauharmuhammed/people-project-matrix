@@ -7,7 +7,6 @@ import { PencilIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -139,8 +138,8 @@ export function NumberCell({
 
 export function BooleanCell({ value, onChange }: EditableCellProps<boolean>) {
   return (
-    <div className="flex w-[100px] justify-center">
-      <Checkbox checked={value} onCheckedChange={onChange} />
+    <div className="flex w-[100px]">
+      <Checkbox defaultChecked={value}/>
     </div>
   );
 }

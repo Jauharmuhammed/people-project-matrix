@@ -60,14 +60,14 @@ export function DataTable<TData, TValue>({
         accessorKey: key,
         header: () => <span className="text-xs capitalize">{key.replace(/_/g, " ")}</span>,
         cell: ({ row }) => {
-          const value = row.getValue(key);
+          const value = row.getValue(key) || "";
           switch (type) {
             case FieldType.BOOLEAN:
               return <BooleanCell value={Boolean(value)} />;
             case FieldType.NUMBER:
-              return <NumberCell value={Number(value)} />;
+              return <NumberCell value={Number(value)} width="w-[180px]" />;
             case FieldType.TEXT:
-              return <TextCell value={String(value)} />;
+              return <TextCell value={String(value)} width="w-[180px]" />;
             case FieldType.ROLE:
               const members = (row.original as any).members.filter((m: IMembers) => m.role === key);
               return (
