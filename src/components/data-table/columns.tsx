@@ -20,9 +20,16 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { IProject, ProjectStatus } from "@/lib/types";
+import { IProject, ProjectStatus, FieldType } from "@/lib/types";
 import { ArrowUp, ArrowDown, EyeOff } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { AddColumnDrawer } from "./add-column-drawer";
+
+declare module "@tanstack/table-core" {
+  interface TableMeta<TData extends unknown> {
+    onAddColumn: (column: { key: string; type: FieldType }) => void;
+  }
+}
 
 type ColumnMetaType = {
   className?: string;
@@ -182,17 +189,93 @@ export const columns: ColumnDef<IProject>[] = [
               <PauseCircle className="h-4 w-4 text-muted-foreground" />
             )}
           </div>
-          <p className="text-xs capitalize">{status.toLowerCase().replace("_", " ")}</p>
+          <p className="text-xs capitalize">
+            {status.toLowerCase().replace("_", " ")}
+          </p>
         </div>
       );
     },
   },
   {
+    accessorKey: "designCompletionDate",
+    header: () => <span className="text-xs">Design Completion Date</span>,
+    cell: ({ row }) => (
+      <div className="w-[180px] truncate">
+        {row.getValue("designCompletionDate")}
+      </div>
+    ),
+  },
+  {
+    accessorKey: "constructionCompletionDate",
+    header: () => <span className="text-xs">Construction Completion Date</span>,
+    cell: ({ row }) => (
+      <div className="w-[180px] truncate">
+        {row.getValue("constructionCompletionDate")}
+      </div>
+    ),
+  },
+  {
+    accessorFn: (row) => row.projectDetails.find(d => d.key === "new_construction")?.value,
+    id: "new_construction",
+    header: () => <span className="text-xs">New Construction</span>,
+    cell: ({ row }) => (
+      <div className="flex justify-center">
+        <Checkbox checked={row.getValue("new_construction")} disabled />
+      </div>
+    ),
+  },
+  {
+    accessorFn: (row) => row.projectDetails.find(d => d.key === "renovation")?.value,
+    id: "renovation",
+    header: () => <span className="text-xs">Renovation</span>,
+    cell: ({ row }) => (
+      <div className="flex justify-center">
+        <Checkbox checked={row.getValue("renovation")} disabled />
+      </div>
+    ),
+  },
+  {
+    accessorFn: (row) => row.projectDetails.find(d => d.key === "commissioning")?.value,
+    id: "commissioning",
+    header: () => <span className="text-xs">Commissioning</span>,
+    cell: ({ row }) => (
+      <div className="flex justify-center">
+        <Checkbox checked={row.getValue("commissioning")} disabled />
+      </div>
+    ),
+  },
+  {
+    accessorFn: (row) => row.projectDetails.find(d => d.key === "vertical_construction")?.value,
+    id: "vertical_construction",
+    header: () => <span className="text-xs">Vertical Construction</span>,
+    cell: ({ row }) => (
+      <div className="flex justify-center">
+        <Checkbox checked={row.getValue("vertical_construction")} disabled />
+      </div>
+    ),
+  },
+  {
+    accessorFn: (row) => row.projectDetails.find(d => d.key === "horizontal_construction")?.value,
+    id: "horizontal_construction",
+    header: () => <span className="text-xs">Horizontal Construction</span>,
+    cell: ({ row }) => (
+      <div className="flex justify-center">
+        <Checkbox checked={row.getValue("horizontal_construction")} disabled />
+      </div>
+    ),
+  },
+  {
     id: "actions",
+    enableHiding: false,
+    header: ({ table }) => (
+      <div className="flex items-center justify-center">
+        <AddColumnDrawer onAddColumn={table.options.meta?.onAddColumn} />
+      </div>
+    ),
     cell: ({ row }) => {
       const project = row.original;
       return (
-        <div className="w-[80px]">
+        <div className="w-[40px] flex justify-center">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="h-8 w-8 p-0">
@@ -214,5 +297,8 @@ export const columns: ColumnDef<IProject>[] = [
         </div>
       );
     },
+    meta: {
+      className: "sticky right-0",
+    } as ColumnMetaType,
   },
 ];

@@ -2,207 +2,383 @@
   "projects": [
     {
       "id": "PRJ001",
-      "name": "Downtown Commercial Complex",
-      "description": "Mixed-use 20-story commercial building with retail spaces and offices",
-      "status": "IN_PROGRESS",
-      "startDate": "2024-01-15",
-      "estimatedEndDate": "2025-06-30",
+      "title": "Downtown Commercial Complex",
+      "client": "Downtown Developments Inc.",
       "location": "CA, USA",
-      "budget": 45000000,
-      "teamMembers": [
-        "arch1",
-        "str1",
-        "mech1",
-        "elec1",
-        "qc1",
-        "civ1"
+      "designCompletionDate": "2024-12-31",
+      "constructionCompletionDate": "2025-06-30",
+      "cost": 45000000,
+      "status": "IN_PROGRESS",
+      "projectDetails": [
+        {
+          "key": "new_construction",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "renovation",
+          "value": false,
+          "type": "boolean"
+        },
+        {
+          "key": "commissioning",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "vertical_construction",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "horizontal_construction",
+          "value": false,
+          "type": "boolean"
+        }
       ],
-      "projectManager": "qc1",
-      "client": "Downtown Developments Inc."
+      "members": ["arch1", "str1", "mech1", "elec1", "qc1", "civ1"]
     },
     {
       "id": "PRJ002",
-      "name": "Riverside Residential Development",
-      "description": "Luxury residential complex with 150 units and amenities",
-      "status": "PLANNING",
-      "startDate": "2024-03-01",
-      "estimatedEndDate": "2025-09-30",
+      "title": "Riverside Residential Development",
+      "client": "Riverside Realty Group",
       "location": "CA, USA",
-      "budget": 28000000,
-      "teamMembers": [
-        "arch2",
-        "str2",
-        "mech2",
-        "elec2",
-        "qc2",
-        "ls1"
+      "designCompletionDate": "2025-03-31",
+      "constructionCompletionDate": "2025-09-30",
+      "cost": 28000000,
+      "status": "PLANNING",
+      "projectDetails": [
+        {
+          "key": "new_construction",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "renovation",
+          "value": false,
+          "type": "boolean"
+        },
+        {
+          "key": "commissioning",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "vertical_construction",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "horizontal_construction",
+          "value": true,
+          "type": "boolean"
+        }
       ],
-      "projectManager": "qc2",
-      "client": "Riverside Realty Group"
+      "members": ["arch2", "str2", "mech2", "elec2", "qc2", "ls1"]
     },
     {
       "id": "PRJ003",
-      "name": "City Hospital Expansion",
-      "description": "Addition of new emergency wing and specialized care units",
-      "status": "IN_PROGRESS",
-      "startDate": "2023-11-01",
-      "estimatedEndDate": "2025-04-30",
+      "title": "City Hospital Expansion",
+      "client": "City Health Services",
       "location": "NY, USA",
-      "budget": 65000000,
-      "teamMembers": [
-        "arch3",
-        "str3",
-        "mech3",
-        "elec3",
-        "qc3",
-        "fp1",
-        "cih1"
+      "designCompletionDate": "2024-10-31",
+      "constructionCompletionDate": "2025-04-30",
+      "cost": 65000000,
+      "status": "IN_PROGRESS",
+      "projectDetails": [
+        {
+          "key": "new_construction",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "renovation",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "commissioning",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "vertical_construction",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "horizontal_construction",
+          "value": false,
+          "type": "boolean"
+        }
       ],
-      "projectManager": "qc3",
-      "client": "City Health Services"
+      "members": ["arch3", "str3", "mech3", "elec3", "qc3", "fp1", "cih1"]
     },
     {
       "id": "PRJ004",
-      "name": "Tech Innovation Campus",
-      "description": "Modern research and development facility with sustainable features",
-      "status": "PLANNING",
-      "startDate": "2024-04-15",
-      "estimatedEndDate": "2025-12-31",
+      "title": "Tech Innovation Campus",
+      "client": "Tech Innovations LLC",
       "location": "TX, USA",
-      "budget": 55000000,
-      "teamMembers": [
-        "arch4",
-        "str4",
-        "mech4",
-        "elec4",
-        "qc4",
-        "geo1"
+      "designCompletionDate": "2025-06-30",
+      "constructionCompletionDate": "2025-12-31",
+      "cost": 55000000,
+      "status": "PLANNING",
+      "projectDetails": [
+        {
+          "key": "new_construction",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "renovation",
+          "value": false,
+          "type": "boolean"
+        },
+        {
+          "key": "commissioning",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "vertical_construction",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "horizontal_construction",
+          "value": true,
+          "type": "boolean"
+        }
       ],
-      "projectManager": "qc4",
-      "client": "Tech Innovations LLC"
+      "members": ["arch4", "str4", "mech4", "elec4", "qc4", "geo1"]
     },
     {
       "id": "PRJ005",
-      "name": "Historic Building Renovation",
-      "description": "Restoration and modernization of 19th-century landmark building",
-      "status": "IN_PROGRESS",
-      "startDate": "2023-09-15",
-      "estimatedEndDate": "2024-08-30",
+      "title": "Historic Building Renovation",
+      "client": "Heritage Preservation Society",
       "location": "MA, USA",
-      "budget": 18000000,
-      "teamMembers": [
-        "arch5",
-        "str5",
-        "mech5",
-        "elec5",
-        "qc5",
-        "cih2"
+      "designCompletionDate": "2024-06-30",
+      "constructionCompletionDate": "2024-08-30",
+      "cost": 18000000,
+      "status": "IN_PROGRESS",
+      "projectDetails": [
+        {
+          "key": "new_construction",
+          "value": false,
+          "type": "boolean"
+        },
+        {
+          "key": "renovation",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "commissioning",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "vertical_construction",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "horizontal_construction",
+          "value": false,
+          "type": "boolean"
+        }
       ],
-      "projectManager": "qc5",
-      "client": "Heritage Preservation Society"
+      "members": ["arch5", "str5", "mech5", "elec5", "qc5", "cih2"]
     },
     {
       "id": "PRJ006",
-      "name": "Sports Complex Development",
-      "description": "Multi-purpose sports facility with indoor and outdoor venues",
-      "status": "COMPLETED",
-      "startDate": "2023-03-01",
-      "estimatedEndDate": "2024-02-28",
+      "title": "Sports Complex Development",
+      "client": "Sports Development Corp.",
       "location": "FL, USA",
-      "budget": 35000000,
-      "teamMembers": [
-        "arch1",
-        "str2",
-        "mech3",
-        "elec4",
-        "qc2",
-        "civ2"
+      "designCompletionDate": "2024-01-31",
+      "constructionCompletionDate": "2024-02-28",
+      "cost": 35000000,
+      "status": "COMPLETED",
+      "projectDetails": [
+        {
+          "key": "new_construction",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "renovation",
+          "value": false,
+          "type": "boolean"
+        },
+        {
+          "key": "commissioning",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "vertical_construction",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "horizontal_construction",
+          "value": true,
+          "type": "boolean"
+        }
       ],
-      "projectManager": "qc2",
-      "client": "Sports Development Corp."
+      "members": ["arch1", "str2", "mech3", "elec4", "qc2", "civ2"]
     },
     {
       "id": "PRJ007",
-      "name": "Green Energy Plant",
-      "description": "Renewable energy facility with solar and wind power integration",
-      "status": "IN_PROGRESS",
-      "startDate": "2023-12-01",
-      "estimatedEndDate": "2025-03-31",
+      "title": "Green Energy Plant",
+      "client": "Green Energy Solutions",
       "location": "OR, USA",
-      "budget": 75000000,
-      "teamMembers": [
-        "arch2",
-        "str3",
-        "mech1",
-        "elec1",
-        "qc3",
-        "geo2",
-        "civ3"
+      "designCompletionDate": "2024-12-31",
+      "constructionCompletionDate": "2025-03-31",
+      "cost": 75000000,
+      "status": "IN_PROGRESS",
+      "projectDetails": [
+        {
+          "key": "new_construction",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "renovation",
+          "value": false,
+          "type": "boolean"
+        },
+        {
+          "key": "commissioning",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "vertical_construction",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "horizontal_construction",
+          "value": true,
+          "type": "boolean"
+        }
       ],
-      "projectManager": "qc3",
-      "client": "Green Energy Solutions"
+      "members": ["arch2", "str3", "mech1", "elec1", "qc3", "geo2", "civ3"]
     },
     {
       "id": "PRJ008",
-      "name": "Shopping Mall Expansion",
-      "description": "Addition of new retail wing and parking structure",
-      "status": "ON_HOLD",
-      "startDate": "2024-02-01",
-      "estimatedEndDate": "2025-08-31",
+      "title": "Shopping Mall Expansion",
+      "client": "Mall Development Group",
       "location": "NV, USA",
-      "budget": 42000000,
-      "teamMembers": [
-        "arch3",
-        "str4",
-        "mech2",
-        "elec2",
-        "qc4",
-        "fp2"
+      "designCompletionDate": "2025-04-30",
+      "constructionCompletionDate": "2025-08-31",
+      "cost": 42000000,
+      "status": "ON_HOLD",
+      "projectDetails": [
+        {
+          "key": "new_construction",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "renovation",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "commissioning",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "vertical_construction",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "horizontal_construction",
+          "value": true,
+          "type": "boolean"
+        }
       ],
-      "projectManager": "qc4",
-      "client": "Mall Development Group"
+      "members": ["arch3", "str4", "mech2", "elec2", "qc4", "fp2"]
     },
     {
       "id": "PRJ009",
-      "name": "Educational Campus",
-      "description": "New university campus with multiple academic buildings",
-      "status": "IN_PROGRESS",
-      "startDate": "2023-10-15",
-      "estimatedEndDate": "2025-07-31",
+      "title": "Educational Campus",
+      "client": "University Development Corp.",
       "location": "IL, USA",
-      "budget": 85000000,
-      "teamMembers": [
-        "arch4",
-        "str5",
-        "mech4",
-        "elec3",
-        "qc5",
-        "ls2",
-        "civ4"
+      "designCompletionDate": "2025-03-31",
+      "constructionCompletionDate": "2025-07-31",
+      "cost": 85000000,
+      "status": "IN_PROGRESS",
+      "projectDetails": [
+        {
+          "key": "new_construction",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "renovation",
+          "value": false,
+          "type": "boolean"
+        },
+        {
+          "key": "commissioning",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "vertical_construction",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "horizontal_construction",
+          "value": true,
+          "type": "boolean"
+        }
       ],
-      "projectManager": "qc5",
-      "client": "University Development Corp."
+      "members": ["arch4", "str5", "mech4", "elec3", "qc5", "ls2", "civ4"]
     },
     {
       "id": "PRJ010",
-      "name": "Industrial Park Development",
-      "description": "Manufacturing and warehouse facility with office spaces",
-      "status": "PLANNING",
-      "startDate": "2024-05-01",
-      "estimatedEndDate": "2025-11-30",
+      "title": "Industrial Park Development",
+      "client": "Industrial Development Partners",
       "location": "WA, USA",
-      "budget": 58000000,
-      "teamMembers": [
-        "arch5",
-        "str1",
-        "mech5",
-        "elec5",
-        "qc1",
-        "geo3",
-        "cih3"
+      "designCompletionDate": "2025-07-31",
+      "constructionCompletionDate": "2025-11-30",
+      "cost": 58000000,
+      "status": "PLANNING",
+      "projectDetails": [
+        {
+          "key": "new_construction",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "renovation",
+          "value": false,
+          "type": "boolean"
+        },
+        {
+          "key": "commissioning",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "vertical_construction",
+          "value": true,
+          "type": "boolean"
+        },
+        {
+          "key": "horizontal_construction",
+          "value": true,
+          "type": "boolean"
+        }
       ],
-      "projectManager": "qc1",
-      "client": "Industrial Development Partners"
+      "members": ["arch5", "str1", "mech5", "elec5", "qc1", "geo3", "cih3"]
     }
   ]
 }

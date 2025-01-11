@@ -9,8 +9,8 @@ export enum ProjectStatus {
 
 export interface IProjectDetails {
   key: string;
-  value: string;
-  type: "boolean" | "select";
+  value: string | number | boolean | Date;
+  type: FieldType;
 }
 
 export enum MemberRole {
@@ -52,5 +52,4 @@ export type FieldType =
   | "select"
   | "text"
   | "number"
-  | "date"
-  | "person";
+  | "date";
