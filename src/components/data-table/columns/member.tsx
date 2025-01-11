@@ -54,7 +54,7 @@ export function MemberAvatarGroup({ members }: MemberAvatarGroupProps) {
                   {member.name.split(" ").map(n => n[0]).join("")}
                 </AvatarFallback>
               </Avatar>
-              <div className="">
+              <div className="flex flex-col items-start">
                 <h4 className="text-sm font-semibold">{member.name}</h4>
                 <p className="text-sm text-muted-foreground capitalize">{member.role.toLowerCase().replace(/_/g, " ")}</p>
                 <p className="text-sm text-muted-foreground">{member.email}</p>
