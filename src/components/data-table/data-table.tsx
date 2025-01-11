@@ -26,6 +26,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { DataTableExport } from "@/components/data-table/export";
+import { DataTableViewOptions } from "./view";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -73,7 +74,10 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-        <DataTableExport table={table} />
+        <div className="flex items-center gap-2">
+          <DataTableExport table={table} />
+          <DataTableViewOptions table={table} />
+        </div>
       </div>
       <div className="relative rounded-md">
         <div className="overflow-x-auto">
