@@ -7,7 +7,7 @@
       "status": "IN_PROGRESS",
       "startDate": "2024-01-15",
       "estimatedEndDate": "2025-06-30",
-      "location": "123 Main Street, Downtown",
+      "location": "CA, USA",
       "budget": 45000000,
       "teamMembers": [
         "arch1",
@@ -18,7 +18,7 @@
         "civ1"
       ],
       "projectManager": "qc1",
-      "progress": 35
+      "client": "Downtown Developments Inc."
     },
     {
       "id": "PRJ002",
@@ -27,7 +27,7 @@
       "status": "PLANNING",
       "startDate": "2024-03-01",
       "estimatedEndDate": "2025-09-30",
-      "location": "456 River Road",
+      "location": "CA, USA",
       "budget": 28000000,
       "teamMembers": [
         "arch2",
@@ -38,7 +38,7 @@
         "ls1"
       ],
       "projectManager": "qc2",
-      "progress": 10
+      "client": "Riverside Realty Group"
     },
     {
       "id": "PRJ003",
@@ -47,7 +47,7 @@
       "status": "IN_PROGRESS",
       "startDate": "2023-11-01",
       "estimatedEndDate": "2025-04-30",
-      "location": "789 Health Avenue",
+      "location": "NY, USA",
       "budget": 65000000,
       "teamMembers": [
         "arch3",
@@ -59,7 +59,7 @@
         "cih1"
       ],
       "projectManager": "qc3",
-      "progress": 45
+      "client": "City Health Services"
     },
     {
       "id": "PRJ004",
@@ -68,7 +68,7 @@
       "status": "PLANNING",
       "startDate": "2024-04-15",
       "estimatedEndDate": "2025-12-31",
-      "location": "101 Innovation Drive",
+      "location": "TX, USA",
       "budget": 55000000,
       "teamMembers": [
         "arch4",
@@ -79,7 +79,7 @@
         "geo1"
       ],
       "projectManager": "qc4",
-      "progress": 5
+      "client": "Tech Innovations LLC"
     },
     {
       "id": "PRJ005",
@@ -88,7 +88,7 @@
       "status": "IN_PROGRESS",
       "startDate": "2023-09-15",
       "estimatedEndDate": "2024-08-30",
-      "location": "234 Heritage Street",
+      "location": "MA, USA",
       "budget": 18000000,
       "teamMembers": [
         "arch5",
@@ -99,7 +99,7 @@
         "cih2"
       ],
       "projectManager": "qc5",
-      "progress": 70
+      "client": "Heritage Preservation Society"
     },
     {
       "id": "PRJ006",
@@ -108,7 +108,7 @@
       "status": "COMPLETED",
       "startDate": "2023-03-01",
       "estimatedEndDate": "2024-02-28",
-      "location": "567 Sports Avenue",
+      "location": "FL, USA",
       "budget": 35000000,
       "teamMembers": [
         "arch1",
@@ -119,7 +119,7 @@
         "civ2"
       ],
       "projectManager": "qc2",
-      "progress": 100
+      "client": "Sports Development Corp."
     },
     {
       "id": "PRJ007",
@@ -128,7 +128,7 @@
       "status": "IN_PROGRESS",
       "startDate": "2023-12-01",
       "estimatedEndDate": "2025-03-31",
-      "location": "890 Energy Park Road",
+      "location": "OR, USA",
       "budget": 75000000,
       "teamMembers": [
         "arch2",
@@ -140,7 +140,7 @@
         "civ3"
       ],
       "projectManager": "qc3",
-      "progress": 25
+      "client": "Green Energy Solutions"
     },
     {
       "id": "PRJ008",
@@ -149,7 +149,7 @@
       "status": "ON_HOLD",
       "startDate": "2024-02-01",
       "estimatedEndDate": "2025-08-31",
-      "location": "432 Retail Drive",
+      "location": "NV, USA",
       "budget": 42000000,
       "teamMembers": [
         "arch3",
@@ -160,7 +160,7 @@
         "fp2"
       ],
       "projectManager": "qc4",
-      "progress": 15
+      "client": "Mall Development Group"
     },
     {
       "id": "PRJ009",
@@ -169,7 +169,7 @@
       "status": "IN_PROGRESS",
       "startDate": "2023-10-15",
       "estimatedEndDate": "2025-07-31",
-      "location": "765 Education Boulevard",
+      "location": "IL, USA",
       "budget": 85000000,
       "teamMembers": [
         "arch4",
@@ -181,7 +181,7 @@
         "civ4"
       ],
       "projectManager": "qc5",
-      "progress": 40
+      "client": "University Development Corp."
     },
     {
       "id": "PRJ010",
@@ -190,7 +190,7 @@
       "status": "PLANNING",
       "startDate": "2024-05-01",
       "estimatedEndDate": "2025-11-30",
-      "location": "321 Industrial Way",
+      "location": "WA, USA",
       "budget": 58000000,
       "teamMembers": [
         "arch5",
@@ -202,7 +202,7 @@
         "cih3"
       ],
       "projectManager": "qc1",
-      "progress": 8
+      "client": "Industrial Development Partners"
     }
   ]
 }

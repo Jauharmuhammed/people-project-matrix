@@ -9,7 +9,7 @@ import { Plus } from "lucide-react";
 const transformedData: IProject[] = projectsData.projects.map((project) => ({
   id: project.id,
   title: project.name,
-  client: "Client Name",
+  client: project.client,
   location: project.location,
   designCompletionDate: project.startDate,
   constructionCompletionDate: project.estimatedEndDate,
