@@ -27,7 +27,7 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { DataTableExport } from "@/components/data-table/export";
 import { DataTableViewOptions } from "./view";
-import { FieldType } from "@/lib/types";
+import { FieldType } from "@/lib/constants";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -57,15 +57,15 @@ export function DataTable<TData, TValue>({
       cell: ({ row }) => {
         const value = row.getValue(key);
         switch (type) {
-          case "boolean":
+          case FieldType.BOOLEAN:
             return <div className="w-[100px]">{String(value ? "Yes" : "No")}</div>;
-          case "date":
+          case FieldType.DATE:
             return value ? (
               <div className="w-[100px]">
                 {new Date(value.toString()).toLocaleDateString()}
               </div>
             ) : null;
-          case "number":
+          case FieldType.NUMBER:
             return <div className="w-[100px]">{Number(value).toString()}</div>;
           default:
             return <div className="w-[150px] truncate">{String(value)}</div>;

@@ -1,7 +1,6 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
-import { Badge } from "@/components/ui/badge";
+import { ColumnDef, Row } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import {
   ChevronsUpDown,
@@ -25,7 +24,7 @@ import { ArrowUp, ArrowDown, EyeOff } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { AddColumnDrawer } from "./add-column-drawer";
 import { FieldType, PROJECT_DETAILS_ITEMS, PROJECT_ROLE_ITEMS } from "@/lib/constants";
-import { MemberAvatarGroup } from "./columns/member";
+import { EditableMemberCell } from "./columns/editable-member-cell";
 
 declare module "@tanstack/table-core" {
   interface TableMeta<TData extends unknown> {
@@ -100,7 +99,7 @@ export const columns: ColumnDef<IProject>[] = [
       </div>
     ),
     meta: {
-      className: "sticky left-0 z-[100]",
+      className: "sticky left-0 z-10",
     } as ColumnMetaType,
   },
   {
@@ -112,7 +111,7 @@ export const columns: ColumnDef<IProject>[] = [
       <div className="w-[60px] truncate">{row.getValue("id")}</div>
     ),
     meta: {
-      className: "sticky left-[40px] z-[100]",
+      className: "sticky left-[40px] z-10",
     } as ColumnMetaType,
   },
   {
@@ -129,7 +128,7 @@ export const columns: ColumnDef<IProject>[] = [
       </div>
     ),
     meta: {
-      className: "sticky left-[116px] z-[100] bg-background",
+      className: "sticky left-[116px] z-10 bg-background",
     } as ColumnMetaType,
   },
   {
@@ -220,7 +219,7 @@ export const columns: ColumnDef<IProject>[] = [
     accessorFn: (row: IProject) => row.projectDetails.find((d) => d.key === detail.key)?.value,
     id: detail.key,
     header: () => <span className="text-xs">{detail.key.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</span>,
-    cell: ({ row }: { row: any }) => (
+    cell: ({ row }: { row: Row<IProject> }) => (
       <div className="flex w-[140px]">
         <Checkbox defaultChecked={row.getValue(detail.key)} />
       </div>
@@ -230,11 +229,24 @@ export const columns: ColumnDef<IProject>[] = [
   ...PROJECT_ROLE_ITEMS.map((role) => ({
     id: role.key,
     header: () => <span className="text-xs">{role.key.replace(/_/g, ' ')}</span>,
-    cell: ({ row }: { row: any }) => {
+    cell: ({ row, table }: { row: Row<IProject>; table: any }) => {
       const members = row.original.members.filter((m: IMembers) => m.role === role.key);
+      const updateMembers = (newMembers: IMembers[]) => {
+        const updatedMembers = [
+          ...row.original.members.filter((m: IMembers) => m.role !== role.key),
+          ...newMembers
+        ];
+        // Here you would typically update your data source
+        console.log('Updated members:', updatedMembers);
+      };
+
       return (
         <div className="w-[120px]">
-          <MemberAvatarGroup members={members} />
+          <EditableMemberCell
+            role={role.key}
+            value={members}
+            onChange={updateMembers}
+          />
         </div>
       );
     },
@@ -274,7 +286,7 @@ export const columns: ColumnDef<IProject>[] = [
       );
     },
     meta: {
-      className: "sticky right-0 z-[100]",
+      className: "sticky right-0 z-10",
     } as ColumnMetaType,
   },
 ];
