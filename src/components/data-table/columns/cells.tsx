@@ -6,6 +6,14 @@ import { Input } from "@/components/ui/input";
 import { PencilIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 interface EditableCellProps<T> {
   value: T;
@@ -14,7 +22,12 @@ interface EditableCellProps<T> {
   width?: string;
 }
 
-export function TextCell({ value, onChange, className, width }: EditableCellProps<string>) {
+export function TextCell({
+  value,
+  onChange,
+  className,
+  width,
+}: EditableCellProps<string>) {
   const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -66,7 +79,12 @@ export function TextCell({ value, onChange, className, width }: EditableCellProp
   );
 }
 
-export function NumberCell({ value, onChange, className, width }: EditableCellProps<number>) {
+export function NumberCell({
+  value,
+  onChange,
+  className,
+  width,
+}: EditableCellProps<number>) {
   const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -123,6 +141,43 @@ export function BooleanCell({ value, onChange }: EditableCellProps<boolean>) {
   return (
     <div className="flex w-[100px] justify-center">
       <Checkbox checked={value} onCheckedChange={onChange} />
+    </div>
+  );
+}
+
+interface DateCellProps extends EditableCellProps<string> {
+  width?: string;
+}
+
+export function DateCell({
+  value,
+  onChange,
+  width = "w-[180px]",
+}: DateCellProps) {
+  const [date, setDate] = useState<Date | undefined>(
+    value ? new Date(value) : undefined
+  );
+
+  return (
+    <div className={cn("group/cell relative", width)}>
+      <Popover>
+        <PopoverTrigger asChild>
+          <button className={cn("p-0 w-full flex justify-start text-sm cursor-pointer outline-none border-none focus-visible:ring-0 text-start", !date && "text-muted-foreground")}>
+            {date ? format(date, "MMMM yyyy") : <span>Pick a date</span>}
+          </button>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-0" align="start">
+          <Calendar
+            mode="single"
+            selected={date}
+            onSelect={(newDate) => {
+              setDate(newDate);
+              onChange?.(newDate?.toISOString() || "");
+            }}
+            initialFocus
+          />
+        </PopoverContent>
+      </Popover>
     </div>
   );
 }

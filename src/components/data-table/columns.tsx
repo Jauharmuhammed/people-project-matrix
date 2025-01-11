@@ -25,7 +25,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { AddColumnDrawer } from "./add-column-drawer";
 import { FieldType, PROJECT_DETAILS_ITEMS, PROJECT_ROLE_ITEMS } from "@/lib/constants";
 import { EditableMemberCell } from "./columns/editable-member-cell";
-import { TextCell } from "./columns/cells";
+import { TextCell, DateCell } from "./columns/cells";
 
 declare module "@tanstack/table-core" {
   interface TableMeta<TData extends unknown> {
@@ -206,18 +206,14 @@ export const columns: ColumnDef<IProject>[] = [
     accessorKey: "designCompletionDate",
     header: () => <span className="text-xs">Design Completion Date</span>,
     cell: ({ row }) => (
-      <div className="w-[180px] truncate">
-        {row.getValue("designCompletionDate")}
-      </div>
+      <DateCell value={row.getValue("designCompletionDate")} />
     ),
   },
   {
     accessorKey: "constructionCompletionDate",
     header: () => <span className="text-xs">Construction Completion Date</span>,
     cell: ({ row }) => (
-      <div className="w-[180px] truncate">
-        {row.getValue("constructionCompletionDate")}
-      </div>
+      <DateCell value={row.getValue("constructionCompletionDate")} />
     ),
   },
   ...PROJECT_DETAILS_ITEMS.map((detail) => ({
