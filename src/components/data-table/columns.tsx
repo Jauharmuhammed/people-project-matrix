@@ -25,6 +25,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { AddColumnDrawer } from "./add-column-drawer";
 import { FieldType, PROJECT_DETAILS_ITEMS, PROJECT_ROLE_ITEMS } from "@/lib/constants";
 import { EditableMemberCell } from "./columns/editable-member-cell";
+import { TextCell } from "./columns/cells";
 
 declare module "@tanstack/table-core" {
   interface TableMeta<TData extends unknown> {
@@ -124,7 +125,7 @@ export const columns: ColumnDef<IProject>[] = [
     ),
     cell: ({ row }) => (
       <div className="w-[300px] truncate font-medium">
-        {row.getValue("title")}
+        <TextCell value={row.getValue("title")} width="w-[300px]" className="truncate" />
       </div>
     ),
     meta: {
@@ -135,14 +136,18 @@ export const columns: ColumnDef<IProject>[] = [
     accessorKey: "client",
     header: () => <span className="text-xs">Client</span>,
     cell: ({ row }) => (
-      <div className="w-[200px] truncate">{row.getValue("client")}</div>
+      <div className="w-[200px] truncate">
+        <TextCell value={row.getValue("client")} width="w-[200px]" className="truncate" />
+      </div>
     ),
   },
   {
     accessorKey: "location",
     header: () => <span className="text-xs">Location</span>,
     cell: ({ row }) => (
-      <div className="w-[120px] truncate">{row.getValue("location")}</div>
+      <div className="w-[120px] truncate">
+        <TextCell value={row.getValue("location")} width="w-[120px]" className="truncate" />
+      </div>
     ),
   },
   {

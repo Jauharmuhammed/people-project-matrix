@@ -28,6 +28,9 @@ import { cn } from "@/lib/utils";
 import { DataTableExport } from "@/components/data-table/export";
 import { DataTableViewOptions } from "./view";
 import { FieldType, PROJECT_ROLE_ITEMS } from "@/lib/constants";
+import { TextCell, NumberCell, BooleanCell } from "./columns/cells";
+import { EditableMemberCell } from "./columns/editable-member-cell";
+import { IMembers, MemberRole } from "@/lib/types";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -55,25 +58,28 @@ export function DataTable<TData, TValue>({
     ({ key, type }: { key: string; type: FieldType }) => {
       const newColumn: ColumnDef<TData, TValue> = {
         accessorKey: key,
-        header: () => (
-          <span className="text-xs capitalize">{key.replace(/_/g, " ")}</span>
-        ),
+        header: () => <span className="text-xs capitalize">{key.replace(/_/g, " ")}</span>,
         cell: ({ row }) => {
           const value = row.getValue(key);
           switch (type) {
             case FieldType.BOOLEAN:
-              return (
-                <div className="w-[100px]">{String(value ? "Yes" : "No")}</div>
-              );
-            case FieldType.DATE:
-              return value ? (
-                <div className="w-[100px]">
-                  {new Date(value.toString()).toLocaleDateString()}
-                </div>
-              ) : null;
+              return <BooleanCell value={Boolean(value)} />;
             case FieldType.NUMBER:
+              return <NumberCell value={Number(value)} />;
+            case FieldType.TEXT:
+              return <TextCell value={String(value)} />;
+            case FieldType.ROLE:
+              const members = (row.original as any).members.filter((m: IMembers) => m.role === key);
               return (
-                <div className="w-[100px]">{Number(value).toString()}</div>
+                <div className="w-[120px]">
+                  <EditableMemberCell
+                    role={key as MemberRole}
+                    value={members}
+                    onChange={(newMembers) => {
+                      // Handle member updates
+                    }}
+                  />
+                </div>
               );
             default:
               return <div className="w-[150px] truncate">{String(value)}</div>;
