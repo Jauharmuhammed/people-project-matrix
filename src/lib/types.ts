@@ -1,8 +1,10 @@
 export enum ProjectStatus {
-  IN_PROGRESS = "In Progress",
-  COMPLETED = "Completed",
-  CANCELLED = "Cancelled",
-  TO_BE_STARTED = "To Be Started",
+  IN_PROGRESS = "IN_PROGRESS",
+  COMPLETED = "COMPLETED",
+  CANCELLED = "CANCELLED",
+  TO_BE_STARTED = "TO_BE_STARTED",
+  PLANNING = "PLANNING",
+  ON_HOLD = "ON_HOLD",
 }
 
 export interface IProjectDetails {

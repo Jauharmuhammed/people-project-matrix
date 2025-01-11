@@ -3,7 +3,16 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ChevronsUpDown, MoreHorizontal } from "lucide-react";
+import {
+  ChevronsUpDown,
+  MoreHorizontal,
+  CircleDot,
+  XCircle,
+  CheckCircle,
+  Timer,
+  PauseCircle,
+  FileIcon,
+} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -152,20 +161,28 @@ export const columns: ColumnDef<IProject>[] = [
     cell: ({ row }) => {
       const status = row.getValue("status") as ProjectStatus;
       return (
-        <div className="w-[120px]">
-          <Badge
-            variant={
-              status === ProjectStatus.COMPLETED
-                ? "default"
-                : status === ProjectStatus.IN_PROGRESS
-                ? "secondary"
-                : status === ProjectStatus.CANCELLED
-                ? "destructive"
-                : "outline"
-            }
-          >
-            {status}
-          </Badge>
+        <div className="w-[120px] flex items-center gap-2">
+          <div className="flex-shrink-0">
+            {status === ProjectStatus.TO_BE_STARTED && (
+              <CircleDot className="h-4 w-4 text-muted-foreground" />
+            )}
+            {status === ProjectStatus.IN_PROGRESS && (
+              <Timer className="h-4 w-4 text-muted-foreground" />
+            )}
+            {status === ProjectStatus.COMPLETED && (
+              <CheckCircle className="h-4 w-4 text-muted-foreground" />
+            )}
+            {status === ProjectStatus.CANCELLED && (
+              <XCircle className="h-4 w-4 text-muted-foreground" />
+            )}
+            {status === ProjectStatus.PLANNING && (
+              <FileIcon className="h-4 w-4 text-muted-foreground" />
+            )}
+            {status === ProjectStatus.ON_HOLD && (
+              <PauseCircle className="h-4 w-4 text-muted-foreground" />
+            )}
+          </div>
+          <p className="text-xs capitalize">{status.toLowerCase().replace("_", " ")}</p>
         </div>
       );
     },
