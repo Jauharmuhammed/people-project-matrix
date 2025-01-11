@@ -1,9 +1,7 @@
-import { DataTable } from "@/components/tables/data-table";
-import { columns } from "@/components/tables/columns";
+import { DataTable } from "@/components/data-table/data-table";
+import { columns } from "@/components/data-table/columns";
 import projectsData from "@/data/projects.json";
 import { IProject, ProjectStatus } from "@/lib/types";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 
 // Transform the data to match IProject interface
 const transformedData: IProject[] = projectsData.projects.map((project) => ({

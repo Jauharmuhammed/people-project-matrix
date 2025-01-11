@@ -1,33 +1,41 @@
-"use client"
+"use client";
 
-import { ColumnDef } from "@tanstack/react-table"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+import { ColumnDef } from "@tanstack/react-table";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ChevronsUpDown, MoreHorizontal } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { IProject, ProjectStatus } from "@/lib/types"
-import { ArrowUp, ArrowDown, EyeOff } from "lucide-react"
-import { Checkbox } from "@/components/ui/checkbox"
+} from "@/components/ui/dropdown-menu";
+import { IProject, ProjectStatus } from "@/lib/types";
+import { ArrowUp, ArrowDown, EyeOff } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 
 type ColumnMetaType = {
   className?: string;
-}
+};
 
 function SortButton({ column }: { column: any }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-          <ArrowUpDown className="h-4 w-4" />
+        <Button variant="ghost" size="sm" className="size-6 p-0">
+          {column.getIsSorted() ? (
+            column.getIsSorted() === "asc" ? (
+              <ArrowUp className="h-4 w-4" />
+            ) : (
+              <ArrowDown className="h-4 w-4" />
+            )
+          ) : (
+            <ChevronsUpDown className="h-4 w-4" />
+          )}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent>
         <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
           <ArrowUp className="mr-2 h-4 w-4" />
           Asc
@@ -42,7 +50,7 @@ function SortButton({ column }: { column: any }) {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }
 
 export const columns: ColumnDef<IProject>[] = [
@@ -60,7 +68,11 @@ export const columns: ColumnDef<IProject>[] = [
       />
     ),
     cell: ({ row }) => (
-      <div className={`${!row.getIsSelected() && 'opacity-0 group-hover:opacity-100'} transition-opacity w-[32px]`}>
+      <div
+        className={`${
+          !row.getIsSelected() && "opacity-0 group-hover:opacity-100"
+        } transition-opacity w-[32px]`}
+      >
         <Checkbox
           checked={row.getIsSelected()}
           onCheckedChange={(value) => row.toggleSelected(!!value)}
@@ -70,7 +82,7 @@ export const columns: ColumnDef<IProject>[] = [
       </div>
     ),
     meta: {
-      className: "sticky left-0"
+      className: "sticky left-0",
     } as ColumnMetaType,
   },
   {
@@ -79,12 +91,10 @@ export const columns: ColumnDef<IProject>[] = [
     enableHiding: false,
     maxSize: 76,
     cell: ({ row }) => (
-      <div className="w-[60px] truncate">
-        {row.getValue("id")}
-      </div>
+      <div className="w-[60px] truncate">{row.getValue("id")}</div>
     ),
     meta: {
-      className: "sticky left-[40px]"
+      className: "sticky left-[40px]",
     } as ColumnMetaType,
   },
   {
@@ -101,68 +111,69 @@ export const columns: ColumnDef<IProject>[] = [
       </div>
     ),
     meta: {
-      className: "sticky left-[116px] bg-background"
+      className: "sticky left-[116px] bg-background",
     } as ColumnMetaType,
   },
   {
     accessorKey: "client",
     header: () => <span className="text-xs">Client</span>,
     cell: ({ row }) => (
-      <div className="w-[200px] truncate">
-        {row.getValue("client")}
-      </div>
+      <div className="w-[200px] truncate">{row.getValue("client")}</div>
     ),
   },
   {
     accessorKey: "location",
     header: () => <span className="text-xs">Location</span>,
     cell: ({ row }) => (
-      <div className="w-[120px] truncate">
-        {row.getValue("location")}
-      </div>
+      <div className="w-[120px] truncate">{row.getValue("location")}</div>
     ),
   },
   {
     accessorKey: "cost",
     header: ({ column }) => (
       <div className="flex items-center space-x-2">
-        <span className="text-xs">Budget</span>
+        <span className="text-xs">Cost</span>
         <SortButton column={column} />
       </div>
     ),
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("cost"))
+      const amount = parseFloat(row.getValue("cost"));
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
-      }).format(amount)
- 
-      return <div className="w-[150px] font-medium">{formatted}</div>
+      }).format(amount);
+
+      return <div className="w-[150px] font-medium">{formatted}</div>;
     },
   },
   {
     accessorKey: "status",
     header: () => <span className="text-xs">Status</span>,
     cell: ({ row }) => {
-      const status = row.getValue("status") as ProjectStatus
+      const status = row.getValue("status") as ProjectStatus;
       return (
         <div className="w-[120px]">
-          <Badge variant={
-            status === ProjectStatus.COMPLETED ? "default" :
-            status === ProjectStatus.IN_PROGRESS ? "secondary" :
-            status === ProjectStatus.CANCELLED ? "destructive" : 
-            "outline"
-          }>
+          <Badge
+            variant={
+              status === ProjectStatus.COMPLETED
+                ? "default"
+                : status === ProjectStatus.IN_PROGRESS
+                ? "secondary"
+                : status === ProjectStatus.CANCELLED
+                ? "destructive"
+                : "outline"
+            }
+          >
             {status}
           </Badge>
         </div>
-      )
+      );
     },
   },
   {
     id: "actions",
     cell: ({ row }) => {
-      const project = row.original
+      const project = row.original;
       return (
         <div className="w-[80px]">
           <DropdownMenu>
@@ -184,7 +195,7 @@ export const columns: ColumnDef<IProject>[] = [
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-      )
+      );
     },
   },
-] 
+];

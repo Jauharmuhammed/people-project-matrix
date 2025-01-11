@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -10,7 +12,6 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-  ColumnMeta,
 } from "@tanstack/react-table";
 
 import {
@@ -22,10 +23,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import React from "react";
 import { cn } from "@/lib/utils";
+import { DataTableExport } from "@/components/data-table/export";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -64,7 +64,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4">
+      <div className="flex items-center py-4 justify-between">
         <Input
           placeholder="Filter by title..."
           value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
@@ -73,6 +73,7 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
+        <DataTableExport table={table} />
       </div>
       <div className="relative rounded-md">
         <div className="overflow-x-auto">
@@ -83,7 +84,11 @@ export function DataTable<TData, TValue>({
                   {headerGroup.headers.map((header) => (
                     <TableHead
                       key={header.id}
-                      className={header.column.columnDef.meta?.className}
+                      className={cn(
+                        header.column.columnDef.meta?.className,
+                        "bg-background py-1",
+                        "group-hover:bg-zinc-50 group-hover:dark:bg-zinc-900"
+                      )}
                     >
                       {header.isPlaceholder
                         ? null
