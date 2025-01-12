@@ -53,4 +53,11 @@ export interface IProject {
   status: ProjectStatus;
   projectDetails: IProjectDetails[];
   members: IMembers[];
+  description?: string;
+  attachments?: Array<{
+    name: string;
+    url: string;
+    size: number;
+    type: string;
+  }>;
 }
