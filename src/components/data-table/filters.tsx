@@ -34,6 +34,11 @@ export function DataTableFacetedFilter<TData, TValue>({
   );
   const [searchQuery, setSearchQuery] = React.useState("");
 
+  React.useEffect(() => {
+    const filterValue = column?.getFilterValue() as string[];
+    setSelectedValues(filterValue || []);
+  }, [column?.getFilterValue()]);
+
   const filteredOptions = options.filter((option) =>
     option.label.toLowerCase().includes(searchQuery.toLowerCase())
   );
