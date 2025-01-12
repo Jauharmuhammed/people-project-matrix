@@ -54,6 +54,7 @@ import {
   PauseCircle,
   FileIcon,
 } from "lucide-react";
+import { AdvancedFilter } from "./advanced-filter";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -173,6 +174,33 @@ export function DataTable<TData, TValue>({
     []
   );
 
+  const filterFields = React.useMemo(
+    () => [
+      {
+        id: "title",
+        label: "Title",
+        type: "text" as const,
+      },
+      {
+        id: "client",
+        label: "Client",
+        type: "text" as const,
+      },
+      {
+        id: "location",
+        label: "Location",
+        type: "text" as const,
+      },
+      {
+        id: "status",
+        label: "Status",
+        type: "select" as const,
+        options: statusOptions,
+      },
+    ],
+    [statusOptions]
+  );
+
   const table = useReactTable({
     data,
     columns,
@@ -230,10 +258,7 @@ export function DataTable<TData, TValue>({
             }
             className="max-w-xs h-8"
           />
-          <Button variant="outline" size="sm" className="h-8">
-            <ChevronDown className="h-4 w-4 mr-2" />
-            Advanced Filters
-          </Button>
+          <AdvancedFilter table={table} filterFields={filterFields} />
           <DataTableFacetedFilter
             column={table.getColumn("status")}
             title="Status"
