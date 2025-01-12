@@ -14,16 +14,31 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { Check, PlusCircleIcon } from "lucide-react";
+import { Check, PlusCircleIcon, Plus, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { IMembers, MemberRole } from "@/lib/types";
 import { MemberAvatarGroup } from "./member";
 import { members as allMembers } from "@/data/members";
+import { format } from "date-fns";
+import { Calendar } from "@/components/ui/calendar";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+
+interface IMemberWithDuration extends IMembers {
+  startDate?: Date;
+  endDate?: Date;
+}
 
 interface EditableMemberCellProps {
   role: MemberRole;
   value: IMembers[];
   onChange: (members: IMembers[]) => void;
+}
+
+interface AdvancedEditableMemberCellProps {
+  role: MemberRole;
+  value: IMemberWithDuration[];
+  onChange: (members: IMemberWithDuration[]) => void;
 }
 
 export function EditableMemberCell({
@@ -106,3 +121,159 @@ export function EditableMemberCell({
     </Popover>
   );
 }
+
+export function AdvancedEditableMemberCell({
+  role,
+  value,
+  onChange,
+}: AdvancedEditableMemberCellProps) {
+  const [open, setOpen] = React.useState(false);
+  const [selectedMembers, setSelectedMembers] = React.useState<IMemberWithDuration[]>(value);
+  const roleMembers = allMembers.filter((m) => m.role === role);
+
+  React.useEffect(() => {
+    setSelectedMembers(value);
+  }, [value]);
+
+  const updateMemberDuration = (memberId: string, startDate?: Date, endDate?: Date) => {
+    const newMembers = selectedMembers.map((member) =>
+      member.id === memberId
+        ? { ...member, startDate, endDate }
+        : member
+    );
+    setSelectedMembers(newMembers);
+    onChange(newMembers);
+  };
+
+  const addMember = (member: IMembers) => {
+    const newMember: IMemberWithDuration = { ...member };
+    setSelectedMembers([...selectedMembers, newMember]);
+    onChange([...selectedMembers, newMember]);
+  };
+
+  const removeMember = (memberId: string) => {
+    const newMembers = selectedMembers.filter((m) => m.id !== memberId);
+    setSelectedMembers(newMembers);
+    onChange(newMembers);
+  };
+
+  return (
+    <div className="space-y-2">
+      {selectedMembers.map((member) => (
+        <div key={member.id} className="flex items-center gap-2 p-2 rounded-md border">
+          <div className="flex-shrink-0">
+            <MemberAvatarGroup members={[member]} />
+          </div>
+          <div className="flex flex-col flex-1 min-w-0">
+            <span className="text-sm font-medium truncate">{member.name}</span>
+            <span className="text-xs text-muted-foreground truncate">
+              {member.email}
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="outline" size="sm">
+                  {member.startDate ? format(member.startDate, "MMM d, yyyy") : "Start Date"}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="end">
+                <Calendar
+                  mode="single"
+                  selected={member.startDate}
+                  onSelect={(date) => updateMemberDuration(member.id, date, member.endDate)}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="outline" size="sm">
+                  {member.endDate ? format(member.endDate, "MMM d, yyyy") : "End Date"}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="end">
+                <Calendar
+                  mode="single"
+                  selected={member.endDate}
+                  onSelect={(date) => updateMemberDuration(member.id, member.startDate, date)}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="size-8"
+              onClick={() => removeMember(member.id)}
+            >
+              <X className="size-4" />
+            </Button>
+          </div>
+        </div>
+      ))}
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
+          <Button variant="outline" className="w-full">
+            <Plus className="mr-2 h-4 w-4" />
+            Add Member
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-[300px] p-0" align="start">
+          <Command>
+            <CommandInput placeholder={`Search ${role.toLowerCase()} members...`} />
+            <CommandEmpty>No members found.</CommandEmpty>
+            <CommandGroup>
+              {roleMembers
+                .filter((m: IMembers) => !selectedMembers.some((sm) => sm.id === m.id))
+                .map((member) => (
+                  <CommandItem
+                    key={member.id}
+                    value={member.id}
+                    onSelect={() => {
+                      addMember(member);
+                      setOpen(false);
+                    }}
+                  >
+                    <div className="flex items-center gap-2">
+                      <div className="flex-shrink-0">
+                        <MemberAvatarGroup members={[member]} />
+                      </div>
+                      <div className="flex flex-col">
+                        <span>{member.name}</span>
+                        <span className="text-xs text-muted-foreground">
+                          {member.email}
+                        </span>
+                      </div>
+                    </div>
+                  </CommandItem>
+                ))}
+            </CommandGroup>
+          </Command>
+        </PopoverContent>
+      </Popover>
+    </div>
+  );
+}
+
+interface EditableMemberCellWithModeProps extends EditableMemberCellProps {
+  defaultMode?: "basic" | "advanced";
+}
+
+export function EditableMemberCellWithMode({
+  role,
+  value,
+  onChange,
+  defaultMode = "basic",
+}: EditableMemberCellWithModeProps) {
+  return defaultMode === "basic" ? (
+    <EditableMemberCell role={role} value={value} onChange={onChange} />
+  ) : (
+    <AdvancedEditableMemberCell
+      role={role}
+      value={value.map((m) => ({ ...m }))}
+      onChange={onChange}
+    />
+  );
+}
+

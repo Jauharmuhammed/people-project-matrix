@@ -8,14 +8,23 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Plus, CalendarIcon, Building2, MapPin, CalendarDays, DollarSign, Activity, CalendarRange } from "lucide-react";
+import {
+  Plus,
+  CalendarIcon,
+  Building2,
+  MapPin,
+  CalendarDays,
+  DollarSign,
+  Activity,
+  CalendarRange,
+} from "lucide-react";
 import {
   IProject,
   IProjectDetails,
   MemberRole,
   ProjectStatus,
 } from "@/lib/types";
-import { EditableMemberCell } from "./columns/editable-member-cell";
+import { EditableMemberCellWithMode } from "./columns/editable-member-cell";
 import { cn, randomId } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -27,6 +36,8 @@ import { format } from "date-fns";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PROJECT_DETAILS_ITEMS } from "@/lib/constants";
 import { Checkbox } from "../ui/checkbox";
+import { Switch } from "@/components/ui/switch";
+import { useState } from "react";
 
 interface ProjectDialogProps {
   project?: IProject;
@@ -40,6 +51,7 @@ export function ProjectDialog({
   onOpenChange,
 }: ProjectDialogProps) {
   const isEditing = Boolean(project);
+  const [advancedMode, setAdvancedMode] = useState(false);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -204,53 +216,70 @@ export function ProjectDialog({
             </TabsList>
             <TabsContent value="secondary" className="space-y-4">
               <div className="space-y-4 py-2">
-                {(project?.projectDetails?.length ? project.projectDetails : PROJECT_DETAILS_ITEMS).map(
-                  (detail: IProjectDetails, index: number) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <Label className="w-60 flex-shrink-0 capitalize">
-                        {detail.key.replace(/_/g, " ")}
-                      </Label>
-                      {/* <Input
+                {(project?.projectDetails?.length
+                  ? project.projectDetails
+                  : PROJECT_DETAILS_ITEMS
+                ).map((detail: IProjectDetails, index: number) => (
+                  <div key={index} className="flex items-center gap-2">
+                    <Label className="w-60 flex-shrink-0 capitalize">
+                      {detail.key.replace(/_/g, " ")}
+                    </Label>
+                    {/* <Input
                         value={String(detail.value)}
                         placeholder={`Enter ${detail.key
                           .toLowerCase()
                           .replace(/_/g, " ")}`}
                         className="border-0 p-0 h-8 focus-visible:ring-0"
                       /> */}
-                      <Checkbox
-                        defaultChecked={detail.value === true}
-                        onCheckedChange={() => {}}
-                      />
-                    </div>
-                  )
-                )}
-                <Button variant="outline" className="w-full">
+                    <Checkbox
+                      defaultChecked={detail.value === true}
+                      onCheckedChange={() => {}}
+                    />
+                  </div>
+                ))}
+                <Button variant="secondary" className="w-full">
                   <Plus className="mr-2 h-4 w-4" />
                   Add Field
                 </Button>
               </div>
             </TabsContent>
-            <TabsContent value="roles" className="space-y-4">
-              <div className="space-y-4 py-2">
+            <TabsContent value="roles" className="">
+              <div className="flex items-center justify-end gap-2 py-2">
+                <Label>Advanced Mode</Label>
+                <Switch
+                  checked={advancedMode}
+                  onCheckedChange={setAdvancedMode}
+                />
+              </div>
+              <div className={cn("divide-y", advancedMode ? "" : "divide-y-0")}>
                 {Object.values(MemberRole).map((role) => (
-                  <div key={role} className="flex items-center gap-4">
-                    <Label className="w-60 flex-shrink-0 capitalize">{role.toLowerCase().replace(/_/g, " ")}</Label>
+                  <div
+                    key={role}
+                    className={cn(
+                      "flex items-start gap-4 ",
+                      advancedMode ? "py-4" : "py-2"
+                    )}
+                  >
+                    <Label className="w-60 flex-shrink-0 capitalize">
+                      {role.toLowerCase().replace(/_/g, " ")}
+                    </Label>
                     <div className="flex-1">
-                      <EditableMemberCell
+                      <EditableMemberCellWithMode
                         role={role}
                         value={
                           project?.members?.filter((m) => m.role === role) || []
                         }
                         onChange={() => {}}
+                        defaultMode={advancedMode ? "advanced" : "basic"}
                       />
                     </div>
                   </div>
                 ))}
-                <Button variant="outline" className="w-full">
-                  <Plus className="mr-2 h-4 w-4" />
-                  Add Role
-                </Button>
               </div>
+              <Button variant="secondary" className="w-full my-4">
+                <Plus className="mr-2 h-4 w-4" />
+                Add Role
+              </Button>
             </TabsContent>
           </Tabs>
         </div>
