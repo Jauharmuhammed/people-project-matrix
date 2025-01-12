@@ -256,7 +256,7 @@ export function DataTable<TData, TValue>({
             onChange={(event) =>
               table.getColumn("title")?.setFilterValue(event.target.value)
             }
-            className="max-w-xs h-8"
+            className="max-w-[200px] h-8"
           />
           <AdvancedFilter table={table} filterFields={filterFields} />
           <DataTableFacetedFilter
