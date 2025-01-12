@@ -9,7 +9,7 @@ type Props = {};
 
 const Navbar = (props: Props) => {
   return (
-    <div className="flex items-center justify-between px-8 py-4">
+    <div className="flex items-center justify-between mx-8 pt-4 pb-2 border-b">
       <h1 className="text-xl font-bold font-geist">PPM</h1>
       <div className="flex items-center gap-2">
         <Link href={siteConfig.links.github} target="_blank">
