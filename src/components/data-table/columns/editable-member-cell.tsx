@@ -23,6 +23,7 @@ import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { CalendarIcon } from "lucide-react";
 
 interface IMemberWithDuration extends IMembers {
   startDate?: Date;
@@ -173,31 +174,35 @@ export function AdvancedEditableMemberCell({
           <div className="flex items-center gap-2">
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="outline" size="sm">
-                  {member.startDate ? format(member.startDate, "MMM d, yyyy") : "Start Date"}
+                <Button variant="outline" size="sm" className="w-[240px] justify-start text-left font-normal">
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {member.startDate && member.endDate ? (
+                    <>
+                      {format(member.startDate, "LLL dd, y")} -{" "}
+                      {format(member.endDate, "LLL dd, y")}
+                    </>
+                  ) : (
+                    <span>Pick duration</span>
+                  )}
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0" align="end">
                 <Calendar
-                  mode="single"
-                  selected={member.startDate}
-                  onSelect={(date) => updateMemberDuration(member.id, date, member.endDate)}
                   initialFocus
-                />
-              </PopoverContent>
-            </Popover>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button variant="outline" size="sm">
-                  {member.endDate ? format(member.endDate, "MMM d, yyyy") : "End Date"}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="end">
-                <Calendar
-                  mode="single"
-                  selected={member.endDate}
-                  onSelect={(date) => updateMemberDuration(member.id, member.startDate, date)}
-                  initialFocus
+                  mode="range"
+                  defaultMonth={member.startDate}
+                  selected={{
+                    from: member.startDate,
+                    to: member.endDate,
+                  }}
+                  onSelect={(range) => {
+                    updateMemberDuration(
+                      member.id,
+                      range?.from,
+                      range?.to
+                    );
+                  }}
+                  numberOfMonths={2}
                 />
               </PopoverContent>
             </Popover>

@@ -260,7 +260,7 @@ export function ProjectDialog({
                       advancedMode ? "py-4" : "py-2"
                     )}
                   >
-                    <Label className="w-60 flex-shrink-0 capitalize">
+                    <Label className="w-48 flex-shrink-0 capitalize">
                       {role.toLowerCase().replace(/_/g, " ")}
                     </Label>
                     <div className="flex-1">
