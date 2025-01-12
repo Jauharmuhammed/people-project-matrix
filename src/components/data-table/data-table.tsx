@@ -31,6 +31,7 @@ import { FieldType, PROJECT_ROLE_ITEMS } from "@/lib/constants";
 import { TextCell, NumberCell, BooleanCell } from "./columns/cells";
 import { EditableMemberCell } from "./columns/editable-member-cell";
 import { IMembers, MemberRole } from "@/lib/types";
+import { ProjectDialog } from "./project-dialog";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -53,12 +54,23 @@ export function DataTable<TData, TValue>({
   );
   const [columns, setColumns] =
     React.useState<ColumnDef<TData, TValue>[]>(initialColumns);
+  const [selectedProject, setSelectedProject] = React.useState<
+    TData | undefined
+  >();
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+
+  const handleRowClick = React.useCallback((row: TData) => {
+    setSelectedProject(row);
+    setDialogOpen(true);
+  }, []);
 
   const handleAddColumn = React.useCallback(
     ({ key, type }: { key: string; type: FieldType }) => {
       const newColumn: ColumnDef<TData, TValue> = {
         accessorKey: key,
-        header: () => <span className="text-xs capitalize">{key.replace(/_/g, " ")}</span>,
+        header: () => (
+          <span className="text-xs capitalize">{key.replace(/_/g, " ")}</span>
+        ),
         cell: ({ row }) => {
           const value = row.getValue(key) || "";
           switch (type) {
@@ -69,7 +81,9 @@ export function DataTable<TData, TValue>({
             case FieldType.TEXT:
               return <TextCell value={String(value)} width="w-[180px]" />;
             case FieldType.ROLE:
-              const members = (row.original as any).members.filter((m: IMembers) => m.role === key);
+              const members = (row.original as any).members.filter(
+                (m: IMembers) => m.role === key
+              );
               return (
                 <div className="w-[120px]">
                   <EditableMemberCell
@@ -132,7 +146,17 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4 justify-between">
+      <div className="flex items-center justify-between">
+        <div></div>
+        <div>
+          <ProjectDialog
+            project={selectedProject as any}
+            open={dialogOpen}
+            onOpenChange={setDialogOpen}
+          />
+        </div>
+      </div>
+      <div className="flex items-center py-8 justify-between">
         <Input
           placeholder="Filter by title..."
           value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
@@ -178,7 +202,8 @@ export function DataTable<TData, TValue>({
                   <TableRow
                     key={row.id}
                     data-state={row.getIsSelected() && "selected"}
-                    className="group"
+                    className="group cursor-pointer"
+                    onClick={() => handleRowClick(row.original)}
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell
