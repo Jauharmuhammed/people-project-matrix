@@ -65,7 +65,7 @@ export function DataTableFacetedFilter<TData, TValue>({
               <Separator orientation="vertical" className="mx-2 h-4" />
               <Badge
                 variant="secondary"
-                className="rounded-sm px-1 font-normal"
+                className="rounded-sm px-1 font-normal size-5 flex items-center justify-center"
               >
                 {selectedValues.length}
               </Badge>
@@ -141,10 +141,7 @@ export function DataTableResetFilter({
   return (
     <Button variant="ghost" onClick={onReset} className="h-8 px-2 lg:px-3">
       Reset
-      <X className="ml-2 h-4 w-4" />
-      <Badge variant="secondary" className="ml-2 rounded-sm px-1 font-normal">
-        {filterCount}
-      </Badge>
+      <X className="h-4 w-4" />
     </Button>
   );
 }
