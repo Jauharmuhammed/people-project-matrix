@@ -1,4 +1,5 @@
 import { FieldType } from "./constants";
+import { LucideIcon } from "lucide-react";
 
 export enum ProjectStatus {
   IN_PROGRESS = "IN_PROGRESS",
@@ -60,4 +61,11 @@ export interface IProject {
     size: number;
     type: string;
   }>;
+}
+
+export interface Option {
+  label: string;
+  value: string;
+  icon?: LucideIcon;
+  count?: number;
 }

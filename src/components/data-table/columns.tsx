@@ -77,6 +77,7 @@ export const columns: ColumnDef<IProject>[] = [
     id: "select",
     enableHiding: false,
     enableSorting: false,
+    size: 40,
     maxSize: 40,
     header: ({ table }) => (
       <Checkbox
@@ -108,6 +109,7 @@ export const columns: ColumnDef<IProject>[] = [
     accessorKey: "id",
     header: () => <span className="text-xs">ID</span>,
     enableHiding: false,
+    size: 76,
     maxSize: 76,
     cell: ({ row }) => (
       <div className="w-[60px] truncate">{row.getValue("id")}</div>
@@ -124,6 +126,7 @@ export const columns: ColumnDef<IProject>[] = [
         <SortButton column={column} />
       </div>
     ),
+    size: 300,
     cell: ({ row }) => (
       <div className="w-[300px] truncate font-medium">
         <TextCell value={row.getValue("title")} width="w-[300px]" className="truncate" />
@@ -136,6 +139,7 @@ export const columns: ColumnDef<IProject>[] = [
   {
     accessorKey: "client",
     header: () => <span className="text-xs">Client</span>,
+    size: 200,
     cell: ({ row }) => (
       <div className="w-[200px] truncate">
         <TextCell value={row.getValue("client")} width="w-[200px]" className="truncate" />
@@ -145,6 +149,7 @@ export const columns: ColumnDef<IProject>[] = [
   {
     accessorKey: "location",
     header: () => <span className="text-xs">Location</span>,
+    size: 180,
     cell: ({ row }) => (
       <div className="w-[180px] truncate">
         <TextCell value={row.getValue("location")} width="w-[180px]" className="truncate" />
@@ -159,6 +164,7 @@ export const columns: ColumnDef<IProject>[] = [
         <SortButton column={column} />
       </div>
     ),
+    size: 180,
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("cost"));
       const formatted = new Intl.NumberFormat("en-US", {
@@ -172,6 +178,8 @@ export const columns: ColumnDef<IProject>[] = [
   {
     accessorKey: "status",
     header: () => <span className="text-xs">Status</span>,
+    size: 180,
+    filterFn: "status",
     cell: ({ row }) => {
       const status = row.getValue("status") as ProjectStatus;
       return (
@@ -206,6 +214,7 @@ export const columns: ColumnDef<IProject>[] = [
   {
     accessorKey: "designCompletionDate",
     header: () => <span className="text-xs">Design Completion Date</span>,
+    size: 180,
     cell: ({ row }) => (
       <DateCell width="w-[180px]" value={row.getValue("designCompletionDate")} />
     ),
@@ -213,6 +222,7 @@ export const columns: ColumnDef<IProject>[] = [
   {
     accessorKey: "constructionCompletionDate",
     header: () => <span className="text-xs">Construction Completion Date</span>,
+    size: 180,
     cell: ({ row }) => (
       <DateCell width="w-[180px]" value={row.getValue("constructionCompletionDate")} />
     ),
@@ -221,6 +231,7 @@ export const columns: ColumnDef<IProject>[] = [
     accessorFn: (row: IProject) => row.projectDetails.find((d) => d.key === detail.key)?.value,
     id: detail.key,
     header: () => <span className="text-xs">{detail.key.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</span>,
+    size: 180,
     cell: ({ row }: { row: Row<IProject> }) => (
       <div className="flex w-[180px]">
         <Checkbox defaultChecked={row.getValue(detail.key)} />
@@ -231,6 +242,7 @@ export const columns: ColumnDef<IProject>[] = [
   ...PROJECT_ROLE_ITEMS.map((role) => ({
     id: role.key,
     header: () => <span className="text-xs">{role.key.replace(/_/g, ' ')}</span>,
+    size: 180,
     cell: ({ row, table }: { row: Row<IProject>; table: any }) => {
       const members = row.original.members.filter((m: IMembers) => m.role === role.key);
       const updateMembers = (newMembers: IMembers[]) => {
@@ -257,6 +269,8 @@ export const columns: ColumnDef<IProject>[] = [
   {
     id: "actions",
     enableHiding: false,
+    size: 40,
+    maxSize: 40,
     header: ({ table }) => (
       <div className="flex items-center justify-center">
         <AddColumnDrawer onAddColumn={table.options.meta?.onAddColumn} />
